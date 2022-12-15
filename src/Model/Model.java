@@ -1,8 +1,6 @@
 package Model;
 
-import Other.GoL;
-import Other.Point;
-import Other.Shape;
+import View.*;
 
 public class Model {
     private int width;
@@ -21,7 +19,7 @@ public class Model {
     }
 
     public Shape[] getShapes() {
-        Point[] point = {new Point(5,5)};
+        Point[] point = {new Point(15,15)};       //test point???
         return (Shape[]) point;
     }
 
