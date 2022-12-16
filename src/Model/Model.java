@@ -1,5 +1,6 @@
 package Model;
 
+import Other.GoL;
 import View.*;
 
 public class Model {
@@ -7,8 +8,7 @@ public class Model {
     private int height;
 
     public Model(int width, int height) {
-        this.width = width;
-        this.height = height;
+        GoL test = new GoL(width, height);         // idk
     }
 
     public void update() {
@@ -19,7 +19,7 @@ public class Model {
     }
 
     public Shape[] getShapes() {
-        Point[] point = {new Point(15,15)};       //test point???
+        Point[] point = {new Point(15,15)};       //test point
         return (Shape[]) point;
     }
 
