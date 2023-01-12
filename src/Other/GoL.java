@@ -5,7 +5,7 @@ import View.Point;
 
 import java.util.ArrayList;
 
-public class GoL {
+public class GoL {          // The world/board
     private Cell[] cells;
     private int width;
     private int height;
@@ -16,58 +16,59 @@ public class GoL {
         boolean test = false;
 
         cells = new Cell[width*height];
-        for (int i = 0; i < cells.length; i++) {
-            for (int o = 0; o < cells.length; o++) {
-                test = !test;
-                cells[i] = new Cell(test, i, o);         //idk
+        for (int i = 0; i < width; i++) {
+            for (int o = 0; o < height; o++) {      //think this correct?
+                test = !test;                       // every other one is alive shenanigans
+                cells[i] = new Cell(test, i, o);
             }
         }
 
+        //maybe set alives here, to make a pattern
+        cells[5+(width*2)].setAlive(true);
+        cells[6+(width*2)].setAlive(true);
+        cells[7+(width*2)].setAlive(true);
+    }
+
+    public void checkClose(int i /* OR cell maybe? */) {
+        int neighbors = 0;
+        if (this.cells[i+1].isAlive()) {
+            neighbors++;
+        }
+        if (this.cells[i-1].isAlive()) {              //edge case(s), dont know what to do
+            neighbors++;
+        }
+        if (this.cells[i-1-width].isAlive()) {        // row above?
+            neighbors++;
+        }
+        if (this.cells[i-width].isAlive()) {
+            neighbors++;
+        }
+        if (this.cells[i+1-width].isAlive()) {
+            neighbors++;
+        }
+        if (this.cells[i-1+width].isAlive()) {      // next row
+            neighbors++;
+        }
+        if (this.cells[i+width].isAlive()) {
+            neighbors++;
+        }
+        if (this.cells[i+1+width].isAlive()) {
+            neighbors++;
+        }
+
+        //save neighbor in the cell, as int or bool
+        this.cells[i].setNr(neighbors);
 
     }
 
-    public void checkClose() {
-        int neighbors = 0;
-
-        //for-loop through all points/cells
-
-        for (int i = 0;;i++) {
-            neighbors = 0;
-            if (c[i].isAlive()) {   //should be neighbor 1 but is c right now
-                neighbors++;
-            }
-            if (c[i+1].isAlive()) {     //should be n2, but c-coords +1 not c[i]+1
-                neighbors++;
-            }
-            if (c[i+2].isAlive()) {
-                neighbors++;
-            }
-            if (c[i+3].isAlive()) {
-                neighbors++;
-            }
-            if (c[i+4].isAlive()) {
-                neighbors++;
-            }
-            if (c[i+5].isAlive()) {
-                neighbors++;
-            }
-            if (c[i+6].isAlive()) {
-                neighbors++;
-            }
-            if (c[i+7].isAlive()) {
-                neighbors++;
-            }
-
-
-            if ((neighbors < 2 || neighbors > 3) && c[i].isAlive()) {
-                //om levande, döda dem
-                //men hur ändrar jag den exakta cellen?
-                c[i].changeState();
-            } else if (!c[i].isAlive() && neighbors == 3) {
-                c[i].changeState();
-            }
+    public void flipAlive(int i) {
+        // wack
+        if ((this.cells[i].getNr() < 2 || this.cells[i].getNr() > 3) && this.cells[i].isAlive()) {
+            //om levande, döda dem
+            this.cells[i].changeState();
+        } else if (!this.cells[i].isAlive() && this.cells[i].getNr() == 3) {
+            this.cells[i].changeState();
         }
-
 
 
     }
