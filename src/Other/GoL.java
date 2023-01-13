@@ -18,7 +18,7 @@ public class GoL {          // The world/board
         cells = new Cell[width*height];
         for (int i = 0; i < width; i++) {
             for (int o = 0; o < height; o++) {      //think this correct?
-                test = !test;                       // every other one is alive shenanigans
+                //test = !test;                       // every other one is alive shenanigans
                 cells[i] = new Cell(test, i, o);
             }
         }
@@ -29,31 +29,63 @@ public class GoL {          // The world/board
         cells[7+(width*2)].setAlive(true);
     }
 
-    public void checkClose(int i /* OR cell maybe? */) {
+    public void checkClose(int i) {
         int neighbors = 0;
-        if (this.cells[i+1].isAlive()) {
-            neighbors++;
+        if (i+1 <= width*height) {       //first 2 ifs in each are for checking edge cases, lets hope this works
+            if (this.cells[i].getY() == this.cells[i+1].getY()) {
+                if (this.cells[i + 1].isAlive()) {
+                    neighbors++;
+                }
+            }
         }
-        if (this.cells[i-1].isAlive()) {              //edge case(s), dont know what to do
-            neighbors++;
+        if (i-1 >= 0) {//
+            if (this.cells[i].getY() == this.cells[i-1].getY()) {
+                if (this.cells[i - 1].isAlive()) {              //edge case(s), dont know what to do
+                    neighbors++;
+                }
+            }
         }
-        if (this.cells[i-1-width].isAlive()) {        // row above?
-            neighbors++;
+        if (i-1-width >= 0) {//
+            if (this.cells[i].getY() == (this.cells[i-1-width].getY()+1)) {
+                if (this.cells[i - 1 - width].isAlive()) {        // row above
+                    neighbors++;
+                }
+            }
         }
-        if (this.cells[i-width].isAlive()) {
-            neighbors++;
+        if (i-width >= 0) {//
+            if (this.cells[i].getY() == (this.cells[i-width].getY()+1)) {
+                if (this.cells[i - width].isAlive()) {
+                    neighbors++;
+                }
+            }
         }
-        if (this.cells[i+1-width].isAlive()) {
-            neighbors++;
+        if (i+1-width >= 0) {//
+            if (this.cells[i].getY() == (this.cells[i+1-width].getY()+1)) {
+                if (this.cells[i + 1 - width].isAlive()) {
+                    neighbors++;
+                }
+            }
         }
-        if (this.cells[i-1+width].isAlive()) {      // next row
-            neighbors++;
+        if (i-1+width <= width*height) {//
+            if (this.cells[i].getY() == (this.cells[i-1+width].getY()-1)) {
+                if (this.cells[i - 1 + width].isAlive()) {      // next row
+                    neighbors++;
+                }
+            }
         }
-        if (this.cells[i+width].isAlive()) {
-            neighbors++;
+        if (i+width <= width*height) {
+            if (this.cells[i].getY() == (this.cells[i+width].getY()-1)) {
+                if (this.cells[i + width].isAlive()) {
+                    neighbors++;
+                }
+            }
         }
-        if (this.cells[i+1+width].isAlive()) {
-            neighbors++;
+        if (i+1+width <= width*height) {
+            if (this.cells[i].getY() == (this.cells[i+1+width].getY()-1)) {
+                if (this.cells[i + 1 + width].isAlive()) {
+                    neighbors++;
+                }
+            }
         }
 
         //save neighbor in the cell, as int or bool

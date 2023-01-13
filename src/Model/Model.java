@@ -5,8 +5,12 @@ import View.*;
 
 public class Model {
     private GoL test;
+    private int w;
+    private int h;
 
     public Model(int width, int height) {
+        this.w = width;
+        this.h = height;
         test = new GoL(width, height);         // idk
     }
 
@@ -25,12 +29,13 @@ public class Model {
         }
         */
 
+
         //testing syntax
-        for (int i = 0;    ;i++) {
+        for (int i = 0; i < w*h; i++) {
             test.checkClose(i);
         }
         //into
-        for (int o = 0;    ;o++) {
+        for (int o = 0; o < w*h; o++) {
             test.flipAlive(o);
         }
     }
