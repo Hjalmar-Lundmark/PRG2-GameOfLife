@@ -40,6 +40,8 @@ public class Model {
         for (int o = 0; o < w*h; o++) {
             test.flipAlive(o);
         }
+
+        // update shapes / pixels pls
     }
 
     public Shape[] getShapes() {
@@ -48,19 +50,8 @@ public class Model {
         return (Shape[]) point;
          */
 
-        ArrayList<Point> points = new ArrayList<Point>();
-        points.add(new Point(7,8));
-        points.add(new Point(8,9));
-        points.add(new Point(9,7));
-        points.add(new Point(9,8));
-        points.add(new Point(9,9));
 
-        Point[] pixelsToDisplay = new Point[points.size()];
-        points.toArray(pixelsToDisplay);
-
-        return (Shape[]) pixelsToDisplay;
-
-        //return (Shape[]) test.getPoints();
+        return (Shape[]) test.getPoints();
     }
 
 }

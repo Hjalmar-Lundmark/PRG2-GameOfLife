@@ -16,26 +16,28 @@ public class GoL {          // The world/board
         boolean test = false;
 
         cells = new Cell[width*height];
+        int arrayVal = 0;
         for (int i = 0; i < width; i++) {
             for (int o = 0; o < height; o++) {      //think this correct?
-                test = !test;                       // every other one is alive shenanigans
-                cells[i] = new Cell(test, i, o);
+                //test = !test;                       // every other one is alive shenanigans
+                cells[arrayVal] = new Cell(test, i, o);
+                arrayVal++;
             }
         }
 
         //maybe set alives here, to make a pattern
-        /*
-        cells[5+(width*2)].setAlive(true);
-        cells[6+(width*2)].setAlive(true);
-        cells[7+(width*2)].setAlive(true);
 
-         */
+        cells[15+(width*12)].setAlive(true);
+        cells[16+(width*12)].setAlive(true);
+        cells[17+(width*12)].setAlive(true);
+
+
     }
 
     public void checkClose(int i) {
         int neighbors = 0;
 
-        if (i+1 <= width*height) {       //first 2 ifs in each are for checking edge cases, lets hope this works
+        if (i+1 < width*height) {       //first 2 ifs in each are for checking edge cases, lets hope this works
             if (this.cells[i].getY() == this.cells[i+1].getY()) {
                 if (this.cells[i + 1].isAlive()) {
                     neighbors++;
@@ -70,21 +72,21 @@ public class GoL {          // The world/board
                 }
             }
         }
-        if (i-1+width <= width*height) {//
+        if (i-1+width < width*height) {//
             if (this.cells[i].getY() == (this.cells[i-1+width].getY()-1)) {
                 if (this.cells[i - 1 + width].isAlive()) {      // next row
                     neighbors++;
                 }
             }
         }
-        if (i+width <= width*height) {
+        if (i+width < width*height) {      //something wrong here?
             if (this.cells[i].getY() == (this.cells[i+width].getY()-1)) {
                 if (this.cells[i + width].isAlive()) {
                     neighbors++;
                 }
             }
         }
-        if (i+1+width <= width*height) {
+        if (i+1+width < width*height) {
             if (this.cells[i].getY() == (this.cells[i+1+width].getY()-1)) {
                 if (this.cells[i + 1 + width].isAlive()) {
                     neighbors++;
@@ -98,11 +100,15 @@ public class GoL {          // The world/board
     }
 
     public void flipAlive(int i) {
-        if ((this.cells[i].getNr() < 2 || this.cells[i].getNr() > 3) && this.cells[i].isAlive()) {
+        if (this.cells[i].isAlive()) {
             //om levande, döda dem
-            this.cells[i].changeState();
-        } else if (!this.cells[i].isAlive() && this.cells[i].getNr() == 3) {
-            this.cells[i].changeState();
+            if ((this.cells[i].getNr() < 2 || this.cells[i].getNr() > 3)) {
+                this.cells[i].changeState();
+            }
+        } else if (!this.cells[i].isAlive()) {
+            if (this.cells[i].getNr() == 3) {
+                this.cells[i].changeState();
+            }
         }
     }
 
