@@ -13,7 +13,7 @@ public class View {
         renderer = new ScreenRenderer(width, height,scale);
         frame.add(renderer);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(new Dimension(width*scale,height*scale));
+        frame.setSize(new Dimension(width*scale+50,height*scale+70));//size up to combat the autozoom on laptop screen
     }
 
     public void draw(Shape[] shapesToDraw) {

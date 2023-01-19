@@ -26,29 +26,41 @@ public class GoL {          // The world/board
             }
         }
 
-        //maybe set alives here, to make a pattern
+        //setAlive here, to make a pattern
+
+        //3x1 line
         /*
         cells[15+(width*12)].setAlive(true);
         cells[16+(width*12)].setAlive(true);
         cells[17+(width*12)].setAlive(true);
-
-
-        cells[103].setAlive(true);
-        cells[153].setAlive(true);
-        cells[203].setAlive(true);
-
-        cells[104].setAlive(true);
-        cells[154].setAlive(true);
-        cells[204].setAlive(true);
-
-        cells[105].setAlive(true);
-        cells[155].setAlive(true);
-        cells[205].setAlive(true);
         */
 
+        //3x3 square
+        /*
+        cells[503].setAlive(true);
+        cells[553].setAlive(true);
+        cells[603].setAlive(true);
+
+        cells[504].setAlive(true);
+        cells[554].setAlive(true);
+        cells[604].setAlive(true);
+
+        cells[505].setAlive(true);
+        cells[555].setAlive(true);
+        cells[605].setAlive(true);
+        */
+
+        //Flyer
+        /*
+        cells[255].setAlive(true);
+        cells[306].setAlive(true);
+        cells[207].setAlive(true);
+        cells[257].setAlive(true);
+        cells[307].setAlive(true);
+        */
     }
 
-    public void checkClose(int i) {     //coordinates for the NBs are wrong
+    public void checkClose(int i) {
         int neighbors = 0;
 
         if (i+1 < width*height) {   //first 2 ifs in each are for checking edge cases, lets hope this works
@@ -115,7 +127,7 @@ public class GoL {          // The world/board
 
     public void flipAlive(int i) {
         if (this.cells[i].isAlive()) {
-            //om levande, döda dem
+            //if alive, kill it
             if (this.cells[i].getNr() < 2 || this.cells[i].getNr() > 3) {
                 this.cells[i].setAlive(false);
                 System.out.println(" something ded!💀");
@@ -123,7 +135,7 @@ public class GoL {          // The world/board
         } else if (!this.cells[i].isAlive()) {
             if (this.cells[i].getNr() == 3) {
                 this.cells[i].setAlive(true);
-                System.out.println(" something alive!");
+                System.out.println(" something alive!😀");
             }
         }
     }
