@@ -33,7 +33,7 @@ public class Cell {
         this.nr = nr;
     }
 
-    public void changeState() {             // change to opposit
+    public void changeState() {             // change to opposite
         alive = !alive;
         //return alive
     }
