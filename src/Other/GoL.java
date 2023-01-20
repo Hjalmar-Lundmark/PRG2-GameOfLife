@@ -17,10 +17,17 @@ public class GoL {          // The world/board
 
         cells = new Cell[width*height];
         int arrayVal = 0;
+        int rand;
         for (int i = 0; i < width; i++) {
-            test = !test;
+            //test = !test;
             for (int o = 0; o < height; o++) {      //think this correct?
-                test = !test;                       // every other one is alive shenanigans
+                //test = !test;                       // every other one is alive shenanigans
+
+                /* //Every tile has 50/50 chance of living at the start
+                rand = (int) (Math.random()*2);
+                if (rand == 1) {
+                    test = !test;
+                }*/
                 cells[arrayVal] = new Cell(test, i, o);
                 arrayVal++;
             }
@@ -30,13 +37,13 @@ public class GoL {          // The world/board
 
         //3x1 line
         /*
-        cells[15+(width*12)].setAlive(true);
-        cells[16+(width*12)].setAlive(true);
-        cells[17+(width*12)].setAlive(true);
+        cells[15+(height*12)].setAlive(true);
+        cells[16+(height*12)].setAlive(true);
+        cells[17+(height*12)].setAlive(true);
         */
 
         //3x3 square
-        /*
+        /* //TODO: change these to x+y*height
         cells[503].setAlive(true);
         cells[553].setAlive(true);
         cells[603].setAlive(true);
@@ -58,6 +65,50 @@ public class GoL {          // The world/board
         cells[257].setAlive(true);
         cells[307].setAlive(true);
         */
+
+        //Gosper Glider Gun
+
+        cells[8+4*height].setAlive(true);
+        cells[8+5*height].setAlive(true);
+        cells[9+4*height].setAlive(true);
+        cells[9+5*height].setAlive(true);
+
+        cells[6+38*height].setAlive(true);
+        cells[6+39*height].setAlive(true);
+        cells[7+38*height].setAlive(true);
+        cells[7+39*height].setAlive(true);
+
+        cells[8+14*height].setAlive(true);
+        cells[9+14*height].setAlive(true);
+        cells[10+14*height].setAlive(true);
+        cells[7+15*height].setAlive(true);
+        cells[11+15*height].setAlive(true);
+        cells[6+16*height].setAlive(true);
+        cells[6+17*height].setAlive(true);
+        cells[12+16*height].setAlive(true);
+        cells[12+17*height].setAlive(true);
+        cells[9+18*height].setAlive(true);
+        cells[7+19*height].setAlive(true);
+        cells[11+19*height].setAlive(true);
+        cells[8+20*height].setAlive(true);
+        cells[9+20*height].setAlive(true);
+        cells[10+20*height].setAlive(true);
+        cells[9+21*height].setAlive(true);
+
+        cells[6+24*height].setAlive(true);
+        cells[6+25*height].setAlive(true);
+        cells[7+24*height].setAlive(true);
+        cells[7+25*height].setAlive(true);
+        cells[8+24*height].setAlive(true);
+        cells[8+25*height].setAlive(true);
+        cells[5+26*height].setAlive(true);
+        cells[9+26*height].setAlive(true);
+        cells[5+28*height].setAlive(true);
+        cells[4+28*height].setAlive(true);
+        cells[9+28*height].setAlive(true);
+        cells[10+28*height].setAlive(true);
+
+
     }
 
     public void checkClose(int i) {
@@ -70,51 +121,51 @@ public class GoL {          // The world/board
                 }
             }
         }
-        if (i-1 >= 0) {//
+        if (i-1 >= 0) {
             if (this.cells[i].getX() == this.cells[i-1].getX()) {
                 if (this.cells[i - 1].isAlive()) {              //edge case(s)
                     neighbors++;
                 }
             }
         }
-        if (i-1-width >= 0) {//
-            if (this.cells[i].getX() == (this.cells[i-1-width].getX()+1)) {
-                if (this.cells[i - 1 - width].isAlive()) {        // row above
+        if (i-1-height >= 0) {
+            if (this.cells[i].getX() == (this.cells[i-1-height].getX()+1)) {
+                if (this.cells[i - 1 - height].isAlive()) {        // row above
                     neighbors++;
                 }
             }
         }
-        if (i-width >= 0) {//
-            if (this.cells[i].getX() == (this.cells[i-width].getX()+1)) {
-                if (this.cells[i - width].isAlive()) {
+        if (i-height >= 0) {
+            if (this.cells[i].getX() == (this.cells[i-height].getX()+1)) {
+                if (this.cells[i - height].isAlive()) {
                     neighbors++;
                 }
             }
         }
-        if (i+1-width >= 0) {//
-            if (this.cells[i].getX() == (this.cells[i+1-width].getX()+1)) {
-                if (this.cells[i + 1 - width].isAlive()) {
+        if (i+1-height >= 0) {
+            if (this.cells[i].getX() == (this.cells[i+1-height].getX()+1)) {
+                if (this.cells[i + 1 - height].isAlive()) {
                     neighbors++;
                 }
             }
         }
-        if (i-1+width < width*height) {//
-            if (this.cells[i].getX() == (this.cells[i-1+width].getX()-1)) {
-                if (this.cells[i - 1 + width].isAlive()) {      // next row
+        if (i-1+height < width*height) {
+            if (this.cells[i].getX() == (this.cells[i-1+height].getX()-1)) {
+                if (this.cells[i - 1 + height].isAlive()) {      // next row
                     neighbors++;
                 }
             }
         }
-        if (i+width < width*height) {      //something wrong here?
-            if (this.cells[i].getX() == (this.cells[i+width].getX()-1)) {
-                if (this.cells[i + width].isAlive()) {
+        if (i+height < width*height) {
+            if (this.cells[i].getX() == (this.cells[i+height].getX()-1)) {
+                if (this.cells[i + height].isAlive()) {
                     neighbors++;
                 }
             }
         }
-        if (i+1+width < width*height) {
-            if (this.cells[i].getX() == (this.cells[i+1+width].getX()-1)) {
-                if (this.cells[i + 1 + width].isAlive()) {
+        if (i+1+height < width*height) {
+            if (this.cells[i].getX() == (this.cells[i+1+height].getX()-1)) {
+                if (this.cells[i + 1 + height].isAlive()) {
                     neighbors++;
                 }
             }
@@ -130,12 +181,12 @@ public class GoL {          // The world/board
             //if alive, kill it
             if (this.cells[i].getNr() < 2 || this.cells[i].getNr() > 3) {
                 this.cells[i].setAlive(false);
-                System.out.println(" something ded!💀");
+                //System.out.println("something died!💀");
             }
         } else if (!this.cells[i].isAlive()) {
             if (this.cells[i].getNr() == 3) {
                 this.cells[i].setAlive(true);
-                System.out.println(" something alive!😀");
+                //System.out.println("something alive!😀");
             }
         }
     }
